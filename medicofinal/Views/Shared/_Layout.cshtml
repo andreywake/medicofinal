@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title Meu medico</title>
+    <link href="~/Content/Site.css" rel="stylesheet" type="text/css" />
+    <link href="~/Content/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <script src="~/Scripts/modernizr-2.6.2.js"></script>
+</head>
+<body style="background-image:url(../../img/3.jpg)">
+    <div class="navbar navbar-inverse" style="background-color:transparent !important; border:0px; margin-bottom:-11px; margin-top:-43px">
+        <div class="container">
+            <div class="navbar-header">
+                @Html.ActionLink("Inicio", "Index", "Home", new { area = "" }, new { @class = "navbar-brand cor" })
+                @Html.ActionLink("Especialidades", "Especialidades", "Home", new { area = "" }, new { @class = "navbar-brand cor" })
+                @Html.ActionLink("Sobre", "About", "Home", new { area = "" }, new { @class = "navbar-brand cor" })
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @Html.ActionLink("Medicos", "Index", "Medicos", new { area = "" }, new { @class = "navbar-brand cor" })
+                    @Html.ActionLink("Especialidades", "Index", "Especialidades", new { area = "" }, new { @class = "navbar-brand cor" })
+                    @Html.ActionLink("Cidades", "Index", "Cidades", new { area = "" }, new { @class = "navbar-brand cor" })
+                }
+            </div>
+            <div class="navbar-collapse collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    @if (User.Identity.IsAuthenticated)
+                    {
+
+                        <li class="dropdown" style="background-color:transparent !important">
+                            <a href="#" class="dropdown-toggle" style="background-color:transparent !important; color:black !important"
+                               data-toggle="dropdown">
+                                Bem Vindo @User.Identity.Name<span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li>@Html.ActionLink("Alterar Senha", "AlterarSenha", "Perfil", new { area = "" }, new { @class = "cor" })</li>
+                                <li>@Html.ActionLink("Sair", "Logout", "Autenticacao", new { area = "" }, new { @class = "cor" })</li>
+                                <li>@Html.ActionLink("Cadastre-se", "Cadastrar", "Autenticacao", new { area = "" }, new { @class = "cor" })</li>
+                            </ul>
+                        </li>                 
+                    }
+                    else
+                    {
+                        <li>@Html.ActionLink("Login", "Login", "Autenticacao", new { area = "" }, new { @class = "cor" })</li>                       
+                    }
+                </ul>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Meu medico</p>
+        </footer>
+    </div>
+
+    <script src="~/Scripts/jquery-1.10.2.min.js"></script>
+    <script src="~/Scripts/bootstrap.min.js"></script>
+    @RenderSection("script", false);
+</body>
+</html>
